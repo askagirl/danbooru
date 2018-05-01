@@ -8,7 +8,6 @@ addons:
       - libglib2.0-dev
       - zlib1g-dev 
       - git 
-      - sudo 
       - libvips-dev 
       - libvips-tools 
       - ffmpeg 
@@ -16,15 +15,13 @@ addons:
       - postgresql-9.6 
       - postgresql-server-dev-9.6
 before_install:
-  - mkdir $BUILD_DIR
-  - git clone https://github.com/r888888888/test_parser.git $BUILD_DIR/test_parser
-  - cd $BUILD_DIR/test_parser
+  - git clone https://github.com/r888888888/test_parser.git /tmp/test_parser
+  - cd /tmp/test_parser
   - make install
 
 env:
   global:
-    - BUILD_DIR=/build
     - DATABASE_URL="postgresql:///danbooru_test?template=template0"
 
 script:
-  - cd $BUILD_DIR; bundle install && bin/rake"
+  - bin/rake"
