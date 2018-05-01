@@ -1,7 +1,12 @@
 dist: trusty
 language: ruby
+sudo: required
+services:
+  - postgresql
+  - memcached
 addons:
   apt:
+    postgresql: "9.6"
     sources:
       - sourceline: "ppa:mc3man/trusty-media"
     packages:
@@ -12,16 +17,18 @@ addons:
       - libvips-tools 
       - ffmpeg 
       - mkvtoolnix
-      - postgresql-9.6 
-      - postgresql-server-dev-9.6
-before_install:
+      # - postgresql-9.6 
+      # - postgresql-server-dev-9.6
+before_script:
   - git clone https://github.com/r888888888/test_parser.git /tmp/test_parser
   - cd /tmp/test_parser
-  - make install
+  - sudo make install
+  - cd $BUILD_DIR; bin/rake db:create db:migrate
 
 env:
   global:
-    - DATABASE_URL="postgresql:///danbooru_test?template=template0"
+    - BUILD_DIR="/build"
+    - DATABASE_URL="postgresql:///travis_ci_test?template=template0"
 
 script:
   - bin/rake"
