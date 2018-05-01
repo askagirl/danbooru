@@ -39,6 +39,7 @@ install:
     make install;
     mkdir ~/.danbooru"
 
+
 script:
   - docker exec -e SECRET_TOKEN=$SECRET_TOKEN
     -e SESSION_SECRET_KEY=$SESSION_SECRET_KEY
