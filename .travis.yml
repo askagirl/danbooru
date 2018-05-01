@@ -37,7 +37,8 @@ install:
     git clone https://github.com/r888888888/test_parser.git $BUILD_DIR/test_parser;
     cd $BUILD_DIR/test_parser;
     make install;
-    mkdir ~/.danbooru"
+    cd $BUILD_DIR;
+    bin/rake db:create db:migrate"
 
 
 script:
