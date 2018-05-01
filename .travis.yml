@@ -37,10 +37,10 @@ install:
     git clone https://github.com/r888888888/test_parser.git $BUILD_DIR/test_parser;
     cd $BUILD_DIR/test_parser;
     make install;
-    mkdir ~/.danbooru;
-    "
+    mkdir ~/.danbooru"
 
 script:
-  - docker exec -t test-container bash -c "
-    cd $BUILD_DIR;
-    bundle install && bin/rake"
+  - docker exec -e SECRET_TOKEN=$SECRET_TOKEN
+    -e SESSION_SECRET_KEY=$SESSION_SECRET_KEY
+    -t test-container 
+    bash -c "cd $BUILD_DIR; bundle install && bin/rake"
