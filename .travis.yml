@@ -10,17 +10,11 @@ addons:
     sources:
       - sourceline: "ppa:mc3man/trusty-media"
     packages:
-      - libglib2.0
-      - libglib2.0-dev
-      - zlib1g-dev 
       - git 
       - libvips-dev 
       - libvips-tools 
       - ffmpeg 
       - mkvtoolnix
-      - flex
-      - bison
-      - ragel
       # - postgresql-9.6 
       # - postgresql-server-dev-9.6
 before_script:
