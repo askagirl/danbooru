@@ -21,7 +21,7 @@ addons:
 before_script:
   - git clone https://github.com/r888888888/test_parser.git /tmp/test_parser
   - cd /tmp/test_parser
-  - sudo make install
+  - make install
   - cd $BUILD_DIR; bin/rake db:create db:migrate
 
 env:
