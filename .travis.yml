@@ -15,9 +15,10 @@ addons:
       - libvips-tools 
       - ffmpeg 
       - mkvtoolnix
-      # - postgresql-9.6 
-      # - postgresql-server-dev-9.6
+      - postgresql-9.6 
+      - postgresql-server-dev-9.6
 before_script:
+  - sudo apt-get install -y libglib2.0-dev
   - git clone https://github.com/r888888888/test_parser.git /tmp/test_parser
   - cd /tmp/test_parser
   - sudo make install
