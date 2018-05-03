@@ -8,19 +8,11 @@ addons:
     sources:
       - sourceline: "ppa:mc3man/trusty-media"
     packages:
-      - build-essential 
-      - automake
       - libssl-dev
       - libxml2-dev 
-      - libxslt-dev 
-      - ncurses-dev
-      - libreadline-dev
       - libcurl4-openssl-dev
       - sendmail-bin 
       - sendmail
-      - coreutils
-      - libglib2.0
-      - libglib2.0-dev
       - git 
       - libvips-dev 
       - libvips-tools 
@@ -29,6 +21,8 @@ addons:
       - postgresql-9.6 
       - postgresql-server-dev-9.6
 before_install:
+  - apt-cache show libglib2.0-dev
+  - echo $LD_LIBRARY_PATH
   - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib  
 before_script:
   - git clone https://github.com/r888888888/test_parser.git /tmp/test_parser
@@ -38,6 +32,7 @@ before_script:
 
 env:
   global:
+    - LD_LIBRARY_PATH="/usr/lib:/usr/local/lib"
     - BUILD_DIR="/build"
     - DATABASE_URL="postgresql:///travis_ci_test?template=template0"
 
