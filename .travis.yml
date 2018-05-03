@@ -1,40 +1,20 @@
+sudo: required
 dist: trusty
-language: ruby
-services:
-  - memcached
-addons:
-  apt:
-    postgresql: "9.6"
-    sources:
-      - sourceline: "ppa:mc3man/trusty-media"
-    packages:
-      - libssl-dev
-      - libxml2-dev 
-      - libcurl4-openssl-dev
-      - sendmail-bin 
-      - sendmail
-      - git 
-      - libvips-dev 
-      - libvips-tools 
-      - ffmpeg 
-      - mkvtoolnix
-      - postgresql-9.6 
-      - postgresql-server-dev-9.6
-before_install:
-  - apt-cache show libglib2.0-dev
-  - echo $LD_LIBRARY_PATH
-  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib  
-before_script:
-  - git clone https://github.com/r888888888/test_parser.git /tmp/test_parser
-  - cd /tmp/test_parser
-  - make install
-  - cd $BUILD_DIR; bin/rake db:create db:migrate
 
 env:
-  global:
-    - LD_LIBRARY_PATH="/usr/lib:/usr/local/lib"
-    - BUILD_DIR="/build"
-    - DATABASE_URL="postgresql:///travis_ci_test?template=template0"
+  - DOCKER_COMPOSE_VERSION=1.21.1
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+before_script:
+  - docker-compose up --build -d
 
 script:
-  - bin/rake
+  - bundle exec rake
+
+after_script:
+  - docker-compose down
