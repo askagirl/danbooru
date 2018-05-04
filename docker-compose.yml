@@ -50,7 +50,9 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.test
-    command: bash -l -c 'cd /app ; bin/rake db:create ; bin/rake db:migrate ; bin/rake db:seed; bin/rake'
+    command: bash -l -c 'cd /app ; bin/rake db:create ; bin/rake db:migrate ; bin/rake db:seed ; bin/rails server -p 3000'
+    ports:
+      - "3000:3000"
     depends_on:
       - db
       - memcached
