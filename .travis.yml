@@ -13,12 +13,10 @@ before_install:
 
 before_script:
   - env | egrep 'DANBOORU|RAILS|DATABASE_URL|SECRET' > .env.test
-  - grep RAILS .env.test
   - docker-compose up --build -d
-  - docker-compose ps
 
 script:
-  - script/testing/wait_for_web.sh localhost:3000 docker exec danbooru_danbooru_1 bundle exec rake
+  - script/testing/wait_for_web.sh localhost:3000 docker exec -e RAILS_ENV=test danbooru_web_1 bundle exec rake test
 
 after_script:
   - docker-compose down

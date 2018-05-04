@@ -26,7 +26,7 @@ services:
       - RUN
     depends_on:
       - db
-  danbooru:
+  web:
     environment:
       - SECRET_TOKEN=73e1ac2e91eb52a9981d09fca561aac3
       - SESSION_SECRET_KEY=73e1ac2e91eb52a9981d09fca561aac3
@@ -50,7 +50,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.test
-    command: bash -l -c 'cd /app ; bin/rake db:create ; bin/rake db:migrate ; bin/rake db:seed ; bin/rails server -e test -p 3000'
+    command: bash -l -c "cd /app ; bin/rake db:create ; bin/rake db:migrate ; bin/rake db:seed ; bin/rails server -e $RAILS_ENV -p 3000"
     ports:
       - "3000:3000"
     depends_on:
