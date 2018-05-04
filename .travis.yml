@@ -13,7 +13,7 @@ before_install:
 
 before_script:
   - docker-compose up --build -d
-  - docker wait danbooru
+  - docker wait danbooru_danbooru
 
 script:
   - docker-compose exec danbooru bash -l -c 'bundle exec rake'
