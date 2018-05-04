@@ -12,7 +12,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 before_script:
-  - docker-compose up --build -d
+  - docker-compose up --build
 
 after_script:
   - docker-compose down
