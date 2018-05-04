@@ -12,11 +12,11 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 before_script:
-  - env | egrep 'DANBOORU|RAILS_ENV|DATABASE_URL|SECRET' > .env.test
+  - env | egrep 'DANBOORU|RAILS|DATABASE_URL|SECRET' > .env.test
   - docker-compose up --build -d
 
 script:
-  - script/testing/wait_for_web.sh danbooru:3000 bundle exec rake
+  - script/testing/wait_for_web.sh danbooru:3000 docker exec danbooru bundle exec rake
 
 after_script:
   - docker-compose down

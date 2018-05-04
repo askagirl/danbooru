@@ -20,3 +20,5 @@ WORKDIR /app
 RUN bundle install > /dev/null
 COPY script/install/database.yml.templ /app/config/database.yml
 COPY script/install/danbooru_local_config.rb.templ /app/config/danbooru_local_config.rb
+EXPOSE 3000
+CMD bin/rails server -p 3000

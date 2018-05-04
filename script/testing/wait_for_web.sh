@@ -6,7 +6,7 @@ host="$1"
 shift
 cmd="$@"
 
-until curl http://$host ; do
+until curl -s http://$host ; do
   echo "Danbooru web is unavailable - sleeping"
   sleep 1
 done
