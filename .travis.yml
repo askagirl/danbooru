@@ -1,5 +1,6 @@
 sudo: required
 dist: trusty
+language: bash
 
 env:
   - DOCKER_COMPOSE_VERSION=1.21.1
