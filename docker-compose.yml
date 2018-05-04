@@ -18,7 +18,7 @@ services:
       - POSTGRES_HOST=db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=73e1ac2e91eb52a9981d09fca561aac3
-      - RAILS_ENV=test
+      - RAILS_ENV
       - AMAZON_KEY
       - AMAZON_SQS_REGION
       - AMAZON_SECRET
@@ -34,14 +34,23 @@ services:
       - RO_DATABASE_URL=postgresql://postgres:73e1ac2e91eb52a9981d09fca561aac3@db:5432
       - ARCHIVE_DATABASE_URL=postgresql://postgres:73e1ac2e91eb52a9981d09fca561aac3@db:5432/db_archive_test
       - DANBOORU_MEMCACHED_SERVERS=memcached:11211
-      - RAILS_ENV=test
-      - DANBOORU_AWS_SQS_ARCHIVE_URL=something
+      - RAILS_ENV
+      - DANBOORU_AWS_SQS_ARCHIVE_URL
+      - DANBOORU_PIXIV_LOGIN
+      - DANBOORU_PIXIV_PASSWORD
+      - DANBOORU_TWITTER_API_KEY
+      - DANBOORU_TWITTER_API_SECRET
+      - DANBOORU_AWS_ACCESS_KEY_ID
+      - DANBOORU_AWS_SECRET_ACCESS_KEY
+      - DANBOORU_AWS_SQS_REGION
+      - DANBOORU_NIJIE_LOGIN
+      - DANBOORU_NIJIE_PASSWORD
+      - DANBOORU_NICO_SEIGA_LOGIN
+      - DANBOORU_NICO_SEIGA_PASSWORD
     build: 
       context: .
       dockerfile: Dockerfile.test
     command: bash -l -c 'cd /app ; bin/rake db:create ; bin/rake db:migrate ; bin/rake db:seed; sleep 1d'
-    ports:
-      - "3000:3000"
     depends_on:
       - db
       - memcached
