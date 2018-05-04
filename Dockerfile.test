@@ -18,5 +18,5 @@ RUN echo 'gem: --no-document' > ~/.gemrc
 RUN gem install bundler
 WORKDIR /app
 RUN bundle install
-COPY config/database.yml.templ /app/config/database.yml
-COPY config/danbooru_local_config.rb.templ /app/config/danbooru_local_config.rb
+COPY script/install/database.yml.templ /app/config/database.yml
+COPY script/install/danbooru_local_config.rb.templ /app/config/danbooru_local_config.rb
