@@ -50,7 +50,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.test
-    command: bash -l -c 'cd /app ; bin/rake db:create ; bin/rake db:migrate ; bin/rake db:seed; sleep 1d'
+    command: bash -l -c 'cd /app ; bin/rake db:create ; bin/rake db:migrate ; bin/rake db:seed; bin/rake'
     depends_on:
       - db
       - memcached
