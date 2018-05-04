@@ -14,7 +14,7 @@ before_script:
   - docker-compose up --build -d
 
 script:
-  - bundle exec rake
+  - docker-compose exec danbooru bash -l -c 'bundle exec rake'
 
 after_script:
   - docker-compose down
